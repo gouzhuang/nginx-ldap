@@ -24,14 +24,13 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN mkdir /var/log/nginx \
 	&& mkdir /etc/nginx \
 	&& cd ~ \
-	&& git clone https://github.com/kvspb/nginx-auth-ldap.git \
+	&& git clone https://github.com/gouzhuang/nginx-auth-ldap.git \
 	&& git clone https://github.com/nginx/nginx.git \
 	&& cd ~/nginx \
 	&& git checkout tags/${NGINX_VERSION} \
 	&& ./auto/configure \
 		--add-module=/root/nginx-auth-ldap \
 		--with-http_ssl_module \
-		--with-debug \
 		--conf-path=/etc/nginx/nginx.conf \ 
 		--sbin-path=/usr/sbin/nginx \ 
 		--pid-path=/var/log/nginx/nginx.pid \ 
@@ -39,7 +38,6 @@ RUN mkdir /var/log/nginx \
 		--http-log-path=/var/log/nginx/access.log \
         --with-stream \
         --with-stream_ssl_module \
-        --with-debug \
         --with-file-aio \
         --with-threads \
         --with-http_gunzip_module \
